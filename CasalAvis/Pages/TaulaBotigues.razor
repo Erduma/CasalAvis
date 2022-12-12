@@ -1,10 +1,32 @@
-﻿
-@page "/"
+﻿@using CasalAvis.Data
+@using CasalAvis.Estructures
+@inject ServeiDades serveiDades
+@inject NavigationManager navigationManager
 
-<PageTitle></PageTitle>
+@page "/taula"
+
+<PageTitle>Taula</PageTitle>
+
+@foreach (var botiga in taulaBotigues)
+{
+    <h1>@botiga.NomBotiga</h1>
+}
 
 
 @code {
+    List<BotigaTaula> taulaBotigues = new List<BotigaTaula>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        //serveiDades.usuariAutenticat == ""
+        if (false)
+        {
+            navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            taulaBotigues = serveiDades.ObtenirBotigues();
+        }
+    }
 }
 

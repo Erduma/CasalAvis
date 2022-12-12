@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CasalAvis.Estructures;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CasalAvis.Data
@@ -9,5 +10,6 @@ namespace CasalAvis.Data
             : base(options)
         {
         }
+        public DbSet<BotigaTaula> botigaTaula { get; set; }
     }
 }
