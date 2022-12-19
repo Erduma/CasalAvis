@@ -1,8 +1,14 @@
 ﻿@page "/maps-features"
 @using Syncfusion.Blazor.Maps
-<h2>Maps</h2>
+<h2>Mapa de Manlleu</h2>
 <br/>
 
+<div class="buscador">
+
+</div>
+
+
+@*MAPA DE MANLLEU*@
 <div class="mapastyle">
 <SfMaps @ref="@mapa" Height="640px" Width="80vw">
     <MapsCenterPosition Latitude="41.99998844462667" Longitude="2.2840283764000575"></MapsCenterPosition>
@@ -26,6 +32,7 @@
     </MapsLayers>
 </SfMaps>
 </div>
+
 @*AQUI VA L'STYLE*@
 <style>
     .mapastyle {
@@ -41,8 +48,6 @@
 @code {
     SfMaps? mapa;
     int IdBotiga;
-    string NomBotiga;
-    string nouTexte = "";
 
     public class Botiga
     {
@@ -52,15 +57,19 @@
         public double Longitude { get; set; }
     }
 
+
+    //POSAR BOTIGUES MANUALMENT
     public List<Botiga> botigues = new List<Botiga>
     {
-        new Botiga{Latitude=41.99777109536099,Longitude=2.282743054586101,Nom="La Salle",Id=1}
     };
+    
 
+    //AFEGIR UNA BOTIGA FENT 2 CLICS
     public void Posicionar()
     {
         MinMaxLatitudeLongitude p = mapa.GetMinMaxLatitudeLongitude();
     }
+
     public void AfegirBotiga(Syncfusion.Blazor.Maps.MouseEventArgs args)
     {
         int idnou = botigues.Max(x => x.Id);
