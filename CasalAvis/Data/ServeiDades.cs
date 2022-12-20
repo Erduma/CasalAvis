@@ -19,5 +19,9 @@ namespace CasalAvis.Data
         {
             return dbContext.botigaTaula.FromSqlRaw("SelectBotiguesTaula").ToList();
         }
+        public List<BotiguesMapa> ObtenirBotiguesMapa()
+        {
+            return dbContext.botigaMapa.FromSqlRaw("SelectBotigues").ToList();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace CasalAvis.Data
         {
         }
         public DbSet<BotigaTaula> botigaTaula { get; set; }
+        public DbSet<BotiguesMapa> botigaMapa { get; set; }
     }
 }
