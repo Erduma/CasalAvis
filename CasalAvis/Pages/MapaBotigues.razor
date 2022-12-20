@@ -1,5 +1,7 @@
 ﻿@page "/maps-features"
 @using Syncfusion.Blazor.Maps
+@using Microsoft.Data.SqlClient
+
 <h2>Mapa de Manlleu</h2>
 <br/>
 
@@ -48,6 +50,8 @@
 @code {
     SfMaps? mapa;
     int IdBotiga;
+    string NomBotiga;
+    string nouTexte = "";
 
     public class Botiga
     {
@@ -61,6 +65,8 @@
     //POSAR BOTIGUES MANUALMENT
     public List<Botiga> botigues = new List<Botiga>
     {
+                new Botiga{Latitude=41.99777109536099,Longitude=2.282743054586101,Nom="La Salle",Id=1}
+        
     };
     
 
@@ -78,5 +84,10 @@
         mapa.Refresh();
     }
     
+    public void MostrarBotiga(Syncfusion.Blazor.Maps.MarkerClickEventArgs args)
+    {
+        IdBotiga = Convert.ToInt32(args.Data["Id"]);
+        NomBotiga = args.Data["Nom"];
+    }
     
 }
