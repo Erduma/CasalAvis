@@ -1,7 +1,9 @@
 ﻿@using CasalAvis.Data
 @using CasalAvis.Estructures
+@using Syncfusion.Blazor.Lists
 @inject ServeiDades serveiDades
 @inject NavigationManager navigationManager
+
 
 @page "/taula"
 
@@ -10,15 +12,39 @@
 
 @foreach (var botiga in taulaBotigues)//mirar correu .group by 
 {
-
-    <h1>@botiga.NomBotiga</h1>
-    <h1>@botiga.NomBarri</h1>
-    <h1>@botiga.NomCarrer</h1>
+    @if (BarriAct != botiga.NomBarri)
+    {
+        <h1>@botiga.NomBarri</h1>
+        <h1></h1>
+        BarriAct = botiga.NomBarri;
+    }
+    @if (CarrerAct != botiga.NomCarrer)
+    {
+        <h2>@botiga.NomCarrer</h2>
+        <h2></h2>
+        CarrerAct = botiga.NomCarrer;
+    }
+    <h3>@botiga.NomBotiga</h3>
+    <button @onclick="()=>PaginaBotiga(botiga.IdBotiga)">mes info de Botiga</button>
 }
+@*
+<SfListView DataSource="@taulaBotigues">
+    <ListViewFieldSettings TValue="BotigaTaula" Id="IdBotiga" Text="NomBotiga" GroupBy="NomBarri"></ListViewFieldSettings>
+</SfListView>*@
 
+<style>
+    h1{
+        margin-left: 20px;
+    }
+    h2{
+        margin-left: 10px;
+    }
+</style>
 
 @code {
     List<BotigaTaula> taulaBotigues = new List<BotigaTaula>();
+    string? BarriAct = "";
+    string? CarrerAct = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,6 +57,11 @@
         {
             taulaBotigues = serveiDades.ObtenirBotigues();
         }
+    }
+
+    private void PaginaBotiga(int IdBotiga)
+    {
+        navigationManager.NavigateTo("/" + IdBotiga);//falta la pagina de botiga
     }
 }
 
